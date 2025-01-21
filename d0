@@ -1,0 +1,80 @@
+#!/bin/bash
+
+usage () {
+	echo "./d26 -d <DAY> -p <PART> -i=</path_to_input>"
+	echo "DESCRIPTION":
+	echo  '\t -u \t displays this usage message.'
+	echo  "\t-p [1,2]\t specifies the part to run."
+	echo  "\t-d [1-25]\t specifies the day to run."
+	echo  "\t-[:b]\t build the question."
+	echo  "\t-i[in_file]\t The path to the file to use as input."
+}
+
+build () {
+	pip install
+	return 0;
+}
+
+do_run () {
+	#./d$DAY/bin/Release/net9.0/d$DAY $INFILE $PART
+	python3 ./Day$DAY/day$DAY.py $PART $INFILE
+	return $?
+}
+	
+	
+ROOT_DIR=`pwd`
+DAY=0
+PART=1
+INFILE="NONE"
+
+while getopts 'd:p:i:b' opt; do
+	case "$opt" in 
+		b)
+			echo "BUILDING"
+			build
+			exit 0
+			;;
+		d)
+			if [ $OPTARG -lt 8 ] && [ $OPTARG -gt 0 ]; then
+				DAY=$OPTARG
+			else
+				echo "INVALID DAY!"
+				usage
+				exit 1
+			fi
+			;;
+		p)
+			if [ $OPTARG -lt 3 ] && [ $OPTARG -gt 0 ]; then
+				PART=$OPTARG
+			else
+				echo "INVALID PART!"
+				usage
+				exit 1
+			fi
+			;;
+		i)
+			echo "This would be infile $OPTARG"
+			INFILE=$OPTARG
+			;;
+		:) 
+			echo "ARGUMENT REQUIRED"
+			usage
+			exit 1
+			;;
+		?)
+			usage
+			exit 1
+			;;
+		*)
+			usage
+			exit 0
+			;;
+	esac
+done
+shift "$(($OPTIND -1))"
+
+echo "OPERATING WITH DAY:$DAY, PART:$PART, INPUT:$INFILE BUILD? $DO_BUILD"
+
+do_run
+exit $?
+
