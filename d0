@@ -35,7 +35,7 @@ while getopts 'd:p:i:b' opt; do
 			exit 0
 			;;
 		d)
-			if [ $OPTARG -lt 8 ] && [ $OPTARG -gt 0 ]; then
+			if [ $OPTARG -lt 26 ] && [ $OPTARG -gt 0 ]; then
 				DAY=$OPTARG
 			else
 				echo "INVALID DAY!"
