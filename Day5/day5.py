@@ -1,5 +1,5 @@
-
-f = open("input.txt", "r")
+from sys import argv as args
+f = open(args[2], "r")
 data = f.read().split("\n\n")
 d1 = data[0].split("\n")
 d2 = data[1].split("\n")
@@ -49,19 +49,22 @@ def shuffle(ls):
     return newls
 
 for ls in updates: #pt1
-    if check(ls):
-        correct.append(int(get(ls)))
-    else:
-       incorrect.append(ls)
-print("pt1: ", sum(correct))    
+	if check(ls):
+		correct.append(int(get(ls)))
+	else:
+	   incorrect.append(ls)
 
-#pt2                        
-corrected=[]
-while len(incorrect) != 0:
-    ls = incorrect.pop(0)
-    while not check(ls):
-        ls = shuffle(ls)
-    corrected.append(int(get(ls)))
-print("pt2: ", sum(corrected))
+if args[1] == "1":
+	print("pt1: ", sum(correct))    
+
+#pt2      
+elif args[1] == "2":                  
+		corrected=[]
+		while len(incorrect) != 0:
+			ls = incorrect.pop(0)
+			while not check(ls):
+				ls = shuffle(ls)
+			corrected.append(int(get(ls)))
+		print("pt2: ", sum(corrected))
 
 f.close()
