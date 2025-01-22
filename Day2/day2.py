@@ -1,7 +1,8 @@
 from itertools import pairwise
 import copy
+import sys
 
-file = open("input.txt", "r")
+file = open(sys.argv[2], "r")
 data = file.read().split("\n")
 data = [d.split(" ") for d in data]
 
@@ -34,18 +35,22 @@ def popOne(row):
             pass
     return False
 
-for row in data: #part1
-    row = [int(r) for r in row]
-    if test1(row) and test2(row):
-        safe1 += 1    
-print("part1: ", safe1) 
 
-for row in data: #part2
-    row = [int(r) for r in row]
-    if test1(row) and test2(row):
-        safe2 += 1
-    else:
-        if popOne(row):
-            safe2 += 1
-print("part2: ",safe2)
+if sys.argv[1] == "1":
+		for row in data: #part1
+			row = [int(r) for r in row]
+			if test1(row) and test2(row):
+				safe1 += 1    
+		print("part1: ", safe1) 
+
+elif sys.argv[1] == "2":
+		for row in data: #part2
+			row = [int(r) for r in row]
+			if test1(row) and test2(row):
+				safe2 += 1
+			else:
+				if popOne(row):
+					safe2 += 1
+		print("part2: ",safe2)
+
 file.close()

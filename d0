@@ -53,7 +53,6 @@ while getopts 'd:p:i:b' opt; do
 			fi
 			;;
 		i)
-			echo "This would be infile $OPTARG"
 			INFILE=$OPTARG
 			;;
 		:) 
