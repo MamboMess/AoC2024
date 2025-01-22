@@ -1,4 +1,19 @@
-f = open("input.txt","r")
+from sys import argv as args
+
+
+def inRange(y,x):
+    if y >= 0 and x >= 0 and y < maxy and x < maxx:
+        return True
+    else:
+        return False
+        
+def getAdj(y,x,z):
+    adj = [(y-1, x), (y, x+1), (y+1, x), (y, x-1)]
+    adj = [i for i in adj if inRange(i[0], i[1]) and int(m[i[0],i[1]])-1 == int(z)]
+    return adj
+
+
+f = open(args[2],"r")
 
 map = f.read().split("\n")
 m = {}
@@ -13,17 +28,6 @@ for y, row in enumerate(map):
              nines.append((y,x))
          elif col == "0":
              zeros[(y,x)] = []
-
-def inRange(y,x):
-    if y >= 0 and x >= 0 and y < maxy and x < maxx:
-        return True
-    else:
-        return False
-        
-def getAdj(y,x,z):
-    adj = [(y-1, x), (y, x+1), (y+1, x), (y, x-1)]
-    adj = [i for i in adj if inRange(i[0], i[1]) and int(m[i[0],i[1]])-1 == int(z)]
-    return adj
 
 total = []
 ranks = []
@@ -44,9 +48,14 @@ for y,x in zeros:
             for nod in nodes:
               if nod not in visited:
                   visited.append(nod)
-  total.append(len(set(peaks)))
-  ranks.append(len(peaks))
+  if args[1] == "1":
+  	total.append(len(set(peaks)))
+  elif args[1] == "2":
+  	ranks.append(len(peaks))
 
-print("part1:", sum(total))
-print("part2:", sum(ranks))
+if args[1] == "1":
+  print("part1:", sum(total))
+elif args[1] == "2":
+  print("part2:", sum(ranks))
+
 f.close()
