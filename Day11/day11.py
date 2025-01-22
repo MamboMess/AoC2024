@@ -1,5 +1,5 @@
-
-f = open("input.txt", "r")
+from sys import argv as args
+f = open(args[2], "r")
 input = f.read().split(" ")
 
 def blink(stones):
@@ -18,9 +18,12 @@ def blink(stones):
             newline.append(str(x))
     return newline
 
-blinks = 25
-while blinks > 0:
-    input = blink(input)
-    blinks -= 1
-print(len(input))
+if args[1] == "1":
+		blinks = 25
+		while blinks > 0:
+			input = blink(input)
+			blinks -= 1
+		print(f"Part 1: {len(input)}")
+else:
+	raise NotImplementedError("Part 2 not implemented")
 f.close()
