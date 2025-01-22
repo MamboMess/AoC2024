@@ -1,6 +1,6 @@
 import copy
-
-f = open("input.txt")
+from sys import argv as args
+f = open(args[2])
 data = f.read().split('\n')
 
 maxx = len(data[0])
@@ -30,41 +30,43 @@ def isxMAS(x,y):
     if (letters[0] + letters[2] == "MS" or letters[0] + letters[2] == "SM") and (letters[1] + letters[3] == "MS" or letters[1] + letters[3] == "SM"):
         return True
 
-for y, i in enumerate(data): ##pt1
-    for x, j in enumerate(i):
-        if j == "X":
-            upcoords = [(x, y-1), (x,y-2), (x,y-3)]
-            dcoords = [(x,y+1),(x,y+2),(x,y+3)]
-            lcoords = [(x-1,y),(x-2,y),(x-3,y)]
-            rcoords = [(x+1,y),(x+2,y),(x+3,y)]
-            uprcoords = [(x+1,y+1),(x+2,y+2),(x+3,y+3)]
-            uplcoords = [(x-1,y+1),(x-2,y+2),(x-3,y+3)]
-            dlcoords = [(x-1,y-1),(x-2,y-2),(x-3,y-3)]
-            drcoords = [(x+1,y-1),(x+2,y-2),(x+3,y-3)]
-            if inRange(x,y,upcoords):
-                xmas += 1 
-            if inRange(x,y,dcoords):
-                xmas += 1
-            if inRange(x,y,lcoords):
-                xmas += 1
-            if inRange(x,y,rcoords):
-                xmas += 1
-            if inRange(x,y,uplcoords):
-                xmas += 1
-            if inRange(x,y,uprcoords):
-                xmas += 1
-            if inRange(x,y,dlcoords):
-                xmas += 1
-            if inRange(x,y,drcoords):
-                xmas += 1
+if args[1] == "1":
+		for y, i in enumerate(data): ##pt1
+			for x, j in enumerate(i):
+				if j == "X":
+					upcoords = [(x, y-1), (x,y-2), (x,y-3)]
+					dcoords = [(x,y+1),(x,y+2),(x,y+3)]
+					lcoords = [(x-1,y),(x-2,y),(x-3,y)]
+					rcoords = [(x+1,y),(x+2,y),(x+3,y)]
+					uprcoords = [(x+1,y+1),(x+2,y+2),(x+3,y+3)]
+					uplcoords = [(x-1,y+1),(x-2,y+2),(x-3,y+3)]
+					dlcoords = [(x-1,y-1),(x-2,y-2),(x-3,y-3)]
+					drcoords = [(x+1,y-1),(x+2,y-2),(x+3,y-3)]
+					if inRange(x,y,upcoords):
+						xmas += 1 
+					if inRange(x,y,dcoords):
+						xmas += 1
+					if inRange(x,y,lcoords):
+						xmas += 1
+					if inRange(x,y,rcoords):
+						xmas += 1
+					if inRange(x,y,uplcoords):
+						xmas += 1
+					if inRange(x,y,uprcoords):
+						xmas += 1
+					if inRange(x,y,dlcoords):
+						xmas += 1
+					if inRange(x,y,drcoords):
+						xmas += 1
 
-print("part1:", xmas)
+		print("part1:", xmas)
+elif args[1] == "2":
+		xmas2 = 0
+		for y, i in enumerate(data): #p2
+			for x, j in enumerate(i):
+				if j == "A":
+					if isxMAS(x,y):
+						xmas2 += 1
+		print("part2:", xmas2)
 
-xmas2 = 0
-for y, i in enumerate(data): #p2
-    for x, j in enumerate(i):
-        if j == "A":
-            if isxMAS(x,y):
-                xmas2 += 1
-print("part2:", xmas2)
 f.close()
