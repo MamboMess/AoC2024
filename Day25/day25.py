@@ -1,6 +1,10 @@
 import numpy as np
+from sys import argv as args
 
-f = open("input.txt", "r")
+if args[1] == "2":
+	raise NotImplementedError("Part 2 not implemented for Day 25")
+
+f = open(args[2], "r")
 input = f.read().split("\n\n")
 input = [i.split("\n") for i in input]
 
