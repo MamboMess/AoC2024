@@ -18,7 +18,6 @@ build () {
 }
 
 do_run () {
-	#./d$DAY/bin/Release/net9.0/d$DAY $INFILE $PART
 	source venv/bin/activate
 	python3 ./Day$DAY/day$DAY.py $PART $INFILE
 	return $?
@@ -76,7 +75,7 @@ while getopts 'd:p:i:b' opt; do
 done
 shift "$(($OPTIND -1))"
 
-echo "OPERATING WITH DAY:$DAY, PART:$PART, INPUT:$INFILE BUILD? $DO_BUILD"
+#echo "OPERATING WITH DAY:$DAY, PART:$PART, INPUT:$INFILE BUILD? $DO_BUILD"
 
 do_run
 exit $?
