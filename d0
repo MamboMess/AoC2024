@@ -33,8 +33,9 @@ INFILE="NONE"
 while getopts 'd:p:i:b' opt; do
 	case "$opt" in 
 		b)
-			echo "BUILDING"
+			echo "BUILDING..."
 			build
+			echo "Done"
 			exit 0
 			;;
 		d)
