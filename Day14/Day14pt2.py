@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
-
-f = open("input.txt", "r")
+import sys
+f = open(sys.argv[2], "r")
 lines = f.read().split("\n")
 
 robots = []
@@ -143,6 +143,7 @@ def update(frame):
     return (plot2)
 
 ani = animation.FuncAnimation(fig=fig, func=update, frames=146, repeat=False,interval=30)
-plt.show()
+#plt.show()
+ani.save("/tmp/d14.out.dc.png")
 
 f.close()
