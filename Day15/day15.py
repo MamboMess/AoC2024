@@ -1,5 +1,9 @@
+from sys import argv
 
-f = open("input.txt", "r")
+if argv[1] == "2":
+	raise NotImplementedException("Part 2 not done for Day 15")
+
+f = open(argv[2], "r")
 map, path = f.read().split("\n\n")
 path = path.replace("\n", "")
 map = map.split("\n")

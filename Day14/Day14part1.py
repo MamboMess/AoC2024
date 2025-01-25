@@ -1,5 +1,5 @@
-
-f = open("input.txt", "r")
+import sys
+f = open(sys.argv[2], "r")
 lines = f.read().split("\n")
 
 robots = []

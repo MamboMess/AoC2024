@@ -1,0 +1,82 @@
+#!/bin/bash
+
+usage () {
+	echo "./d26 -d <DAY> -p <PART> -i=</path_to_input>"
+	echo "DESCRIPTION":
+	echo  '\t -u \t displays this usage message.'
+	echo  "\t-p [1,2]\t specifies the part to run."
+	echo  "\t-d [1-25]\t specifies the day to run."
+	echo  "\t-[:b]\t build the question."
+	echo  "\t-i[in_file]\t The path to the file to use as input."
+}
+
+build () {
+	python3 -m venv venv
+	source venv/bin/activate
+	pip3 install -r requirements.txt
+	return 0;
+}
+
+do_run () {
+	source venv/bin/activate
+	python3 ./Day$DAY/day$DAY.py $PART $INFILE
+	return $?
+}
+	
+	
+ROOT_DIR=`pwd`
+DAY=0
+PART=1
+INFILE="NONE"
+
+while getopts 'd:p:i:b' opt; do
+	case "$opt" in 
+		b)
+			echo "BUILDING..."
+			build
+			echo "Done"
+			exit 0
+			;;
+		d)
+			if [ $OPTARG -lt 26 ] && [ $OPTARG -gt 0 ]; then
+				DAY=$OPTARG
+			else
+				echo "INVALID DAY!"
+				usage
+				exit 1
+			fi
+			;;
+		p)
+			if [ $OPTARG -lt 3 ] && [ $OPTARG -gt 0 ]; then
+				PART=$OPTARG
+			else
+				echo "INVALID PART!"
+				usage
+				exit 1
+			fi
+			;;
+		i)
+			INFILE=$OPTARG
+			;;
+		:) 
+			echo "ARGUMENT REQUIRED"
+			usage
+			exit 1
+			;;
+		?)
+			usage
+			exit 1
+			;;
+		*)
+			usage
+			exit 0
+			;;
+	esac
+done
+shift "$(($OPTIND -1))"
+
+#echo "OPERATING WITH DAY:$DAY, PART:$PART, INPUT:$INFILE BUILD? $DO_BUILD"
+
+do_run
+exit $?
+

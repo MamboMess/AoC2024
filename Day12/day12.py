@@ -1,6 +1,7 @@
-
-f = open("input.txt", "r")
+from sys import argv as args
+f = open(args[2], "r")
 input = f.read().split("\n")
+
 
 maxx = len(input[0])
 maxy = len(input)
@@ -79,24 +80,26 @@ def findEdges(roi):
           W.append(i)
     return N, S,E,W
 
-regions= []
-q = []
-start = (0,0)
-plots = {}
-for y, col in enumerate(input):
-  for x, i in enumerate(col):
-     if (y,x) not in visited:
-         visited.append((y,x))
-         region = flood(y,x)
-         if i not in plots:
-             plots[i] = []
-         plots[i].append(set(region))
+if args[1] == "1":
+	regions= []
+	q = []
+	start = (0,0)
+	plots = {}
+	for y, col in enumerate(input):
+		for x, i in enumerate(col):
+			if (y,x) not in visited:
+				visited.append((y,x))
+				region = flood(y,x)
+				if i not in plots:
+					plots[i] = []
+				plots[i].append(set(region))
+		prices = []
+		for p, ls in plots.items():
+			for roi in ls:
+				price, sids = roiPrice(roi)
+				prices.append(price)
 
-prices = []
-for p, ls in plots.items():
-   for roi in ls:
-      price, sids = roiPrice(roi)
-      prices.append(price)
-
-print("pt1: ", sum(prices))
+	print("pt1: ", sum(prices))
+else:
+	raise NotImplementedError("P2 not implemented")
 f.close()

@@ -1,8 +1,9 @@
 import itertools as it
 import copy
 import re
+from sys import argv as args
 
-f = open("input.txt", "r")
+f = open(args[2], "r")
 rows = f.read().split("\n")
 
 def calc(ops,t):
@@ -59,7 +60,9 @@ def dothing(operators, rows):
                     break
     return sum(vals)
 
-print("part1:", dothing("*+", rows))
-print("part1:", dothing("*+|", rows))
+if args[1] == "1":
+	print("part1:", dothing("*+", rows))
+elif args[1] == "2":
+	print("part2:", dothing("*+|", rows))
 
 f.close()

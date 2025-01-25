@@ -1,5 +1,9 @@
 import re
-f = open("input.txt", "r")
+from sys import argv as args
+f = open(args[2], "r")
+
+if args[1] == "2":
+	raise NotImplementedError("P2 not implemented")
 
 file = f.read().split("\n\n")
 file = [i.split("\n") for i in file]

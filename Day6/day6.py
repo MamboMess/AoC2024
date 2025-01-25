@@ -1,5 +1,5 @@
-
-f = open("input.txt", "r")
+from sys import argv as args
+f = open(args[2], "r")
 rows = f.read().split("\n")
 
 maxx = len(rows[0])-1
@@ -68,40 +68,40 @@ visited = []
 for i,y,x in visit:
     visited.append((y,x))
 
-print("part1: ", len(set(visited)))
-
-visited.pop(0)
-blocks = []
-for y, col in enumerate(rows):
-      for x, i in enumerate(col):
-          if i == "#":
-              blocks.append((y,x))
-looped = 0
-loopers = []
-for a in set(visited):
-    objs = blocks + [a]
-    start = find(rows)
-    i,y,x= start
-    pos = i,y,x
-    visit = []
-    while inRange(pos):
-      step = next(pos)
-      if step not in visit:
-        if (step[1], step[2]) not in objs:
-          pos = step
-          visit.append(pos)
-        else:
-          pos = turn(pos)
-          visit.append(pos)
-      elif step in loopers:
-          looped += 1
-          loopers.extend(visit)
-          break
-      else:
-          looped += 1
-          loopers.extend(visit)
-          print(looped)
-          break
-          
-print("part2:", looped)
+if args[1] == "1":
+	print("part1: ", len(set(visited)))
+elif args[1] == "2":
+		visited.pop(0)
+		blocks = []
+		for y, col in enumerate(rows):
+			  for x, i in enumerate(col):
+				  if i == "#":
+					  blocks.append((y,x))
+		looped = 0
+		loopers = []
+		for a in set(visited):
+			objs = blocks + [a]
+			start = find(rows)
+			i,y,x= start
+			pos = i,y,x
+			visit = []
+			while inRange(pos):
+				step = next(pos)
+				if step not in visit:
+					if (step[1], step[2]) not in objs:
+						pos = step
+						visit.append(pos)
+					else:
+						pos = turn(pos)
+						visit.append(pos)
+				elif step in loopers:
+					looped += 1
+					loopers.extend(visit)
+					break
+				else:
+					looped += 1
+					loopers.extend(visit)
+					break
+				  
+		print("part2:", looped)
 f.close()
